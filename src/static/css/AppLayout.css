@@ -1,0 +1,14 @@
+.logo {
+  float: left;
+  width: 120px;
+  height: 45px;
+  margin: 16px 20px 16px 40px;
+  background-image: url('../img/logo.png');
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+}
+
+.support{
+  margin-left: 500px;
+}
