@@ -1,13 +1,13 @@
 import { Button, Result } from 'antd';
 import React from 'react';
+import '../../static/css/404.css';
 
 export default function NotFound() {
   return (
-    <Result
-      status="404"
-      title="404"
-      subTitle="Sorry, the page you visited does not exist."
-      extra={<Button type="primary">Back Home</Button>}
-    />
+    <div >
+      <span id="emoji">&#128549;</span>
+      <div id='page404'>你来到了未知的世界</div>
+    </div>
+    
   );
 }

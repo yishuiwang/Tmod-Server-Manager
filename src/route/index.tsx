@@ -14,18 +14,21 @@ interface MyRouter {
 
 const router: MyRouter[] = [
   {
-    tittle: '登录',
-    path: '/login',
-    key: 'login',
-    component: <LoginForm />,
-  },
-  {
     tittle: '主页面',
     path: '/home',
     key: 'home',
     component: <Home />,
   },
 
+];
+
+export const unAuthRouter: MyRouter[] = [
+  {
+    tittle: '登录',
+    path: '/login',
+    key: 'login',
+    component: <LoginForm />,
+  },
 ];
 
 export default router;

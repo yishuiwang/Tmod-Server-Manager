@@ -1,7 +1,7 @@
 import { Breadcrumb, Dropdown, Layout, Menu, MenuProps } from 'antd';
 import {
   AppstoreOutlined,
-  MailOutlined,
+  CloudServerOutlined,
   SettingOutlined,
   GithubOutlined,
 } from '@ant-design/icons';
@@ -14,9 +14,9 @@ interface IProps {}
 
 const items: MenuProps['items'] = [
   {
-    label: 'Navigation One',
+    label: '服务器管理',
     key: 'mail',
-    icon: <MailOutlined />,
+    icon: <CloudServerOutlined />,
   },
   {
     label: 'Navigation Two',
@@ -82,7 +82,6 @@ const AppLayout: React.FC<IProps> = (Props) => {
     <Layout className="layout">
       <Header style={{ backgroundColor: 'white' }}>
         <div className="logo" />
-
         <Menu
           className='Menu'
           theme="light"

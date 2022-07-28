@@ -9,6 +9,10 @@
   -o-background-size: cover;
 }
 
-.support{
+.support {
   margin-left: 500px;
+}
+
+.Menu {
+  font-size: medium;
 }
