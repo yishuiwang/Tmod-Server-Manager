@@ -1,5 +1,5 @@
 import React from 'react';
-import router from '../route';
+import router, { unAuthRouter } from '../route';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -14,6 +14,9 @@ export default function View() {
     <div>
       <Router>
         <Routes>
+          {unAuthRouter.map((r) => (
+            <Route key={r.key} path={r.path} element={r.component}></Route>
+          ))}
           <Route path="/" element={<Navigate to="/login" replace />}></Route>
 
           {router.map((r) => (

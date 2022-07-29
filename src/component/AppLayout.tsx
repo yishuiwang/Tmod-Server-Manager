@@ -9,6 +9,9 @@ import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 
 import '../static/css/AppLayout.css';
+import Server from './server/server';
+import File from './file/file'
+
 
 interface IProps {}
 
@@ -90,6 +93,10 @@ const AppLayout: React.FC<IProps> = (Props) => {
           items={items.concat(support)}
         />
       </Header>
+      <Content style={{ padding: '0 50px' }}>
+        <Server></Server>
+      
+      </Content>
     </Layout>
   );
 };
