@@ -1,33 +1,36 @@
-import { Breadcrumb, Dropdown, Layout, Menu, MenuProps } from 'antd';
+import { Breadcrumb, Col, Dropdown, Layout, Menu, MenuProps, Row } from 'antd';
 import {
   AppstoreOutlined,
   CloudServerOutlined,
   SettingOutlined,
   GithubOutlined,
+  CodeOutlined,
 } from '@ant-design/icons';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 
 import '../static/css/AppLayout.css';
 import Server from './server/server';
-import File from './file/file'
-
+import File from './file/file';
+import Player from './server/player';
+import Mod from './server/mod';
+import { Link } from 'react-router-dom';
 
 interface IProps {}
 
 const items: MenuProps['items'] = [
   {
-    label: '服务器管理',
-    key: 'mail',
+    label: <Link to={'/home'}>服务器管理</Link>,
+    key: 'server',
     icon: <CloudServerOutlined />,
   },
   {
-    label: 'Navigation Two',
-    key: 'app',
-    icon: <AppstoreOutlined />,
+    label: <Link to={'/ssh'}>SSH</Link>,
+    key: 'ssh',
+    icon: <CodeOutlined />,
   },
   {
-    label: 'Navigation Three - Submenu',
+    label: '还没想好些什么',
     key: 'SubMenu',
     icon: <SettingOutlined />,
     children: [
@@ -82,22 +85,31 @@ const support: MenuProps['items'] = [
 
 const AppLayout: React.FC<IProps> = (Props) => {
   return (
-    <Layout className="layout">
-      <Header style={{ backgroundColor: 'white' }}>
-        <div className="logo" />
-        <Menu
-          className='Menu'
-          theme="light"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items.concat(support)}
-        />
-      </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Server></Server>
-      
-      </Content>
-    </Layout>
+    <div>
+      <Layout>
+        <Header style={{ backgroundColor: 'white' }}>
+          <div className="logo" />
+          <Menu
+            className="Menu"
+            theme="light"
+            mode="horizontal"
+            defaultSelectedKeys={['2']}
+            items={items.concat(support)}
+          />
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <Row justify="center" style={{ minHeight: '100vh' }}>
+            <Col>
+              <Server></Server>
+              <Mod></Mod>
+              <File></File>
+              <Player></Player>
+              
+            </Col>
+          </Row>
+        </Content>
+      </Layout>
+    </div>
   );
 };
 

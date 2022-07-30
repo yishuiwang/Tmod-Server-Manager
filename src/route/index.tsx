@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import NotFound from '../pages/404/page404';
 import Home from '../pages/home/home';
 import LoginForm from '../pages/login/login';
+import SSH from '../pages/SSH/ssh';
 
 interface MyRouter {
   tittle: string;
@@ -19,7 +20,6 @@ const router: MyRouter[] = [
     key: 'home',
     component: <Home />,
   },
-
 ];
 
 export const unAuthRouter: MyRouter[] = [

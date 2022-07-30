@@ -1,14 +1,14 @@
-import { Input, Space } from 'antd';
+import { Button, Input, Space } from 'antd';
 import React, { useState } from 'react';
-import Mod from './mod';
-import Player from './player';
-import World from './world';
+import { EditOutlined, StopOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function Server() {
   const [ip, setIp] = useState('192.168.200.1');
   const [num, setNum] = useState('16');
   const [passwrod, setPassword] = useState('sbsz');
   const [port, setPort] = useState('7777');
+  const [name, setName] = useState('空岛生存带师');
+  const [seed, setSeed] = useState('3.3.2.1964603061');
 
   const handleChange = (event: any) => {
     const id = event.currentTarget.getAttribute('id');
@@ -26,6 +26,12 @@ export default function Server() {
       case 'port':
         setPort(value);
         break;
+      case 'name':
+        setName(value);
+        break;
+      case 'seed':
+        setSeed(value);
+        break;
       default:
         console.log('set input value error!');
         break;
@@ -33,9 +39,9 @@ export default function Server() {
   };
 
   return (
-    <div>
+    <div style={{ width: '1000px', backgroundColor: 'white' }}>
       <h2>服务器信息：</h2>
-      <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+      <Space direction="vertical" size="small" style={{ display: 'flex' }}>
         <div>
           IP地址
           <Input
@@ -56,19 +62,40 @@ export default function Server() {
         </div>
         <div>
           密码
+          <Space size="large">
+            <Input
+              id="passwrod"
+              value={passwrod}
+              onChange={handleChange}
+              style={{ height: '34px', width: '160px', marginLeft: '20px' }}
+            ></Input>
+          </Space>
+        </div>
+        <div>
+          端口
+          <Space size="large">
+            <Input
+              id="port"
+              value={port}
+              onChange={handleChange}
+              style={{ height: '34px', width: '160px', marginLeft: '20px' }}
+            ></Input>
+          </Space>
+        </div>
+        <div>
+          地图
           <Input
-            id="passwrod"
-            value={passwrod}
+            id="name"
+            value={name}
             onChange={handleChange}
             style={{ height: '34px', width: '160px', marginLeft: '20px' }}
           ></Input>
         </div>
-
         <div>
-          端口
+          种子
           <Input
-            id="port"
-            value={port}
+            id="seed"
+            value={seed}
             onChange={handleChange}
             style={{ height: '34px', width: '160px', marginLeft: '20px' }}
           ></Input>
