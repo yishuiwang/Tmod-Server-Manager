@@ -1,6 +1,12 @@
-import { Button, message, Upload, UploadProps } from 'antd';
-import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
+import { Button, Input, message, Space, Upload, UploadProps } from 'antd';
+import {
+  UploadOutlined,
+  DownloadOutlined,
+  InboxOutlined,
+  CloudUploadOutlined,
+} from '@ant-design/icons';
 import React from 'react';
+import Dragger from 'antd/lib/upload/Dragger';
 
 const props: UploadProps = {
   name: 'file',
@@ -21,19 +27,67 @@ const props: UploadProps = {
 };
 
 export default function File() {
+  const boxStyle = {
+    padding: '15px',
+    borderRadius: '10px',
+    boxShadow: '0 0 0 5px rgb(0 0 0 / 13%)',
+    marginTop: '20px',
+    backgroundColor: 'white',
+    marginBottom: '100px',
+  };
+
+  const borderMod = {
+    borderWidth: '3px',
+    borderStyle: 'solid',
+    borderRadius: '5px',
+    borderColor: 'rgb(0 0 0 / 13%)',
+    height: '200px',
+    display: 'inline-flex',
+    background: 'white',
+    width: '48%',
+    padding: '10px',
+  };
+
+  const borderMap = { ...borderMod, marginLeft: '4%' };
+
   return (
-    <div>
+    <div style={boxStyle}>
       <h2>File</h2>
-      <Upload {...props}>
-        <Button shape="circle" icon={<UploadOutlined />}>
-        </Button>
-      </Upload>
-      <Upload {...props}>
-        <Button shape="circle" icon={<UploadOutlined />}>
-        </Button>
-      </Upload>
-      <Button shape="circle" icon={<DownloadOutlined />}>
-      </Button>
+      <div style={borderMod}>
+        <Space direction="vertical" style={{ width: '100%' }}>
+          <h3>Mod</h3>
+          <Upload style={{ marginLeft: '0px' }}>
+            <Space size="middle">
+              <Input
+                style={{ height: '40px' }}
+                placeholder="Mod..."
+                prefix={<CloudUploadOutlined />}
+              />
+              <Button style={{ height: '40px' }}>上传Mod</Button>
+            </Space>
+          </Upload>
+          <br></br>
+          <Button>下载Mod</Button>
+        </Space>
+      </div>
+
+      <div style={borderMap}>
+        <Space direction="vertical">
+          <h3>地图</h3>
+          <Upload style={{ marginLeft: '0px' }}>
+            <Space size="middle">
+              <Input
+                style={{ height: '40px' }}
+                placeholder="World..."
+                prefix={<CloudUploadOutlined />}
+              />
+              <Button style={{ height: '40px' }}>上传地图</Button>
+            </Space>
+          </Upload>
+          <br></br>
+          <Button>下载地图</Button>
+        </Space>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,13 @@
-import { Breadcrumb, Col, Dropdown, Layout, Menu, MenuProps, Row } from 'antd';
+import {
+  Breadcrumb,
+  Col,
+  Dropdown,
+  Layout,
+  Menu,
+  MenuProps,
+  Row,
+  Space,
+} from 'antd';
 import {
   AppstoreOutlined,
   CloudServerOutlined,
@@ -100,11 +109,12 @@ const AppLayout: React.FC<IProps> = (Props) => {
         <Content style={{ padding: '0 50px' }}>
           <Row justify="center" style={{ minHeight: '100vh' }}>
             <Col>
-              <Server></Server>
-              <Mod></Mod>
-              <File></File>
-              <Player></Player>
-              
+              <Space direction="vertical" size={30}>
+                <Server></Server>
+                <Mod></Mod>
+                <Player></Player>
+                <File></File>
+              </Space>
             </Col>
           </Row>
         </Content>

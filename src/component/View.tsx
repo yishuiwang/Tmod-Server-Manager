@@ -20,7 +20,7 @@ export default function View() {
           ))}
           <Route path="/" element={<Navigate to="/login" replace />}></Route>
 
-          <Route path="/ssh" element={<AppLayout><SSH></SSH></AppLayout>}></Route>
+          <Route path="/ssh" element={<SSH></SSH>}></Route>
 
           {router.map((r) => (
             <Route
