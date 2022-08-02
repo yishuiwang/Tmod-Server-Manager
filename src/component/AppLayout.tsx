@@ -24,6 +24,7 @@ import File from './file/file';
 import Player from './server/player';
 import Mod from './server/mod';
 import { Link } from 'react-router-dom';
+import Test from './server/test';
 
 interface IProps {}
 
