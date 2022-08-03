@@ -6,7 +6,7 @@ const boxStyle = {
   padding: '15px',
   borderRadius: '10px',
   boxShadow: '0 0 0 5px rgb(0 0 0 / 13%)',
-  marginTop: '20px',
+  marginTop: '40px',
   backgroundColor: 'white',
 };
 const border = {
@@ -25,7 +25,7 @@ const initialServer = {
   seed: '3.3.2.1964603061',
   serverVersion: 'tModLoader v2022.6.96.4',
   clientVersion: 'Terraria Server v1.4.3.6',
-  time: 'Time: 8:03 PM',
+  time: '8:03 PM',
 };
 
 export default function Server() {
@@ -39,9 +39,29 @@ export default function Server() {
       ...server,
       [id]: value,
     });
+    console.log(server);
   };
 
-  const setTime = () => {
+  const setTime = (event: any) => {
+    const id = event.target.id;
+    let newServer = server;
+    switch (id) {
+      case 'dawn':
+        newServer.time = '4:30 AM';
+        break;
+      case 'noon':
+        newServer.time = '12:00 PM';
+        break;
+      case 'dusk':
+        newServer.time = '7:30 PM';
+        break;
+      case 'midnight':
+        newServer.time = '12:00 AM';
+        break;
+      default:
+        console.log('wrong time!');
+    }
+    handleChange(event);
     message.success('设置成功');
   };
 
@@ -108,22 +128,22 @@ export default function Server() {
               ></Input>
             </Space>
             <Tooltip title="设置时间">
-              <Button style={{ width: '100%' }} onClick={setTime}>
+              <Button id="dawn" style={{ width: '100%' }} onClick={setTime}>
                 黎明
               </Button>
             </Tooltip>
             <Tooltip title="设置时间">
-              <Button style={{ width: '100%' }} onClick={setTime}>
+              <Button id="noon" style={{ width: '100%' }} onClick={setTime}>
                 正午
               </Button>
             </Tooltip>
             <Tooltip title="设置时间">
-              <Button style={{ width: '100%' }} onClick={setTime}>
+              <Button id="dusk" style={{ width: '100%' }} onClick={setTime}>
                 黄昏
               </Button>
             </Tooltip>
             <Tooltip title="设置时间">
-              <Button style={{ width: '100%' }} onClick={setTime}>
+              <Button id="midnight" style={{ width: '100%' }} onClick={setTime}>
                 午夜
               </Button>
             </Tooltip>

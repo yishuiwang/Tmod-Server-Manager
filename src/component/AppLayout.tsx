@@ -89,7 +89,7 @@ const support: MenuProps['items'] = [
       </a>
     ),
     key: 'github',
-    icon: <GithubOutlined />,
+    icon: <GithubOutlined style={{ fontSize: '120%' }} />,
   },
 ];
 

@@ -33,116 +33,134 @@ const initialBan: player[] = [
   { id: '2', nickname: 'nmsl' },
 ];
 
-const normal: ColumnsType<player> = [
-  {
-    title: 'id',
-    dataIndex: 'id',
-    key: 'id',
-    render: (text) => <a>{text}</a>,
-    width: '100px',
-  },
-  {
-    title: 'nickname',
-    dataIndex: 'nickname',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-    width: '300px',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <Tooltip title="踢出服务器">
-          <Button
-            shape="circle"
-            icon={<StopOutlined />}
-            onClick={kickFormServer}
-          />
-        </Tooltip>
-        <Tooltip title="加入黑名单">
-          <Button
-            shape="circle"
-            icon={<CloseCircleOutlined onClick={addBlacklist} />}
-          />
-        </Tooltip>
-      </Space>
-    ),
-    width: '150px',
-  },
-];
-
-const kickFormServer = () => {
-  if (window.confirm('确定踢出服务器?')) {
-    message.success('已踢出');
-  }
+const boxStyle = {
+  padding: '15px',
+  borderRadius: '10px',
+  boxShadow: '0 0 0 5px rgb(0 0 0 / 13%)',
+  marginTop: '20px',
+  backgroundColor: 'white',
 };
-
-const addBlacklist = () => {
-  if (window.confirm('确定加入黑名单?')) {
-    message.success('已加入');
-  }
+const borderOnline = {
+  borderWidth: '3px',
+  borderStyle: 'solid',
+  borderRadius: '5px',
+  borderColor: 'rgb(0 0 0 / 13%)',
+  width: '48%',
+  display: 'inline-flex',
 };
-
-const delBlacklist = () => {
-  if (window.confirm('确定删除?')) {
-    message.success('已删除');
-  }
-};
-
-const ban: ColumnsType<player> = [
-  {
-    title: 'id',
-    dataIndex: 'id',
-    key: 'id',
-    render: (text) => <a>{text}</a>,
-    width: '100px',
-  },
-  {
-    title: 'nickname',
-    dataIndex: 'nickname',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-    width: '300px',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <Tooltip title="删除">
-          <Button
-            shape="circle"
-            icon={<DeleteOutlined />}
-            onClick={delBlacklist}
-          />
-        </Tooltip>
-      </Space>
-    ),
-    width: '150px',
-  },
-];
+const borderBan = { ...borderOnline, marginLeft: '4%' };
 
 export default function Player() {
   const [palyList, setPalyList] = useState(initialPalyer);
   const [banPlayer, setBanPlayer] = useState(initialBan);
+  const ban: ColumnsType<player> = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+      key: 'id',
+      render: (text) => <a>{text}</a>,
+      width: '100px',
+    },
+    {
+      title: 'nickname',
+      dataIndex: 'nickname',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+      width: '300px',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tooltip title="删除">
+            <Button
+              shape="circle"
+              icon={<DeleteOutlined />}
+              onClick={() => delBlacklist(record)}
+            />
+          </Tooltip>
+        </Space>
+      ),
+      width: '150px',
+    },
+  ];
+  const normal: ColumnsType<player> = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+      key: 'id',
+      render: (text) => <a>{text}</a>,
+      width: '100px',
+    },
+    {
+      title: 'nickname',
+      dataIndex: 'nickname',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+      width: '300px',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tooltip title="踢出服务器">
+            <Button
+              shape="circle"
+              icon={<StopOutlined />}
+              onClick={() => kickFormServer(record)}
+            />
+          </Tooltip>
+          <Tooltip title="加入黑名单">
+            <Button
+              shape="circle"
+              icon={
+                <CloseCircleOutlined onClick={() => addBlacklist(record)} />
+              }
+            />
+          </Tooltip>
+        </Space>
+      ),
+      width: '150px',
+    },
+  ];
 
-  const boxStyle = {
-    padding: '15px',
-    borderRadius: '10px',
-    boxShadow: '0 0 0 5px rgb(0 0 0 / 13%)',
-    marginTop: '20px',
-    backgroundColor: 'white',
-  };
-  const borderOnline = {
-    borderWidth: '3px',
-    borderStyle: 'solid',
-    borderRadius: '5px',
-    borderColor: 'rgb(0 0 0 / 13%)',
-    width: '48%',
-    display: 'inline-flex',
-  };
-  const borderBan = { ...borderOnline, marginLeft: '4%' };
+  function kickFormServer(record: any) {
+    if (window.confirm('确定踢出服务器?')) {
+      const newList = palyList.filter((Obj) => {
+        return Obj.id !== record.id;
+      });
+      setPalyList(newList);
+      message.success('已踢出');
+    }
+  }
+
+  function addBlacklist(record: any) {
+    if (window.confirm('确定加入黑名单?')) {
+      let newList = palyList.filter((Obj) => {
+        return Obj.id !== record.id;
+      });
+      setPalyList(newList);
+      let banObj = {
+        id: String(banPlayer.length + 1),
+        nickname: record.nickname,
+      };
+      let banList = [...banPlayer, banObj];
+      setBanPlayer(banList);
+      message.success('已加入');
+    }
+  }
+
+  function delBlacklist(record: any) {
+    if (window.confirm('确定从黑名单中删除?')) {
+      const newList = banPlayer.filter((Obj) => {
+        return Obj.id !== record.id;
+      });
+      setBanPlayer(newList);
+      message.success('已删除');
+    }
+  }
 
   return (
     <div style={boxStyle}>
