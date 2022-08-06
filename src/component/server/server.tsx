@@ -65,6 +65,16 @@ export default function Server() {
     message.success('设置成功');
   };
 
+  const restart = () => {
+    message.success('重启服务器成功');
+  };
+  const stop = () => {
+    message.success('关闭服务器成功');
+  };
+  const start = () => {
+    message.success('开启服务器');
+  };
+
   return (
     <div style={boxStyle}>
       <h2>服务器信息：</h2>
@@ -167,6 +177,15 @@ export default function Server() {
                 onChange={handleChange}
               ></Input>
             </Space>
+            <Button id="restart" style={{ width: '100%' }} onClick={restart}>
+              重启
+            </Button>
+            <Button id="stop" style={{ width: '100%' }} onClick={stop}>
+              关服
+            </Button>
+            <Button id="start" style={{ width: '100%' }} onClick={start}>
+              开服
+            </Button>
           </Space>
         </div>
       </div>
