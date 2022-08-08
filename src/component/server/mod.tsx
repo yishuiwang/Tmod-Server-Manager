@@ -31,7 +31,6 @@ const boxStyle = {
 const border = {
   borderWidth: '3px',
   borderStyle: 'solid',
-  borderRadius: '5px',
   borderColor: 'rgb(0 0 0 / 13%)',
 };
 
@@ -41,27 +40,27 @@ export default function Mod() {
     {
       title: 'id',
       dataIndex: 'id',
-      key: 'id',
+      key: '001modid',
       render: (text) => <a>{text}</a>,
       width: '100px',
     },
     {
       title: '模组',
       dataIndex: 'name',
-      key: 'name',
+      key: '001modmod',
       render: (text) => <a>{text}</a>,
       width: '500px',
     },
     {
       title: '状态',
       dataIndex: 'isEnable',
-      key: 'isEnable',
+      key: '001modisEnable',
       render: holdon,
       width: '200px',
     },
     {
       title: 'Action',
-      key: 'action',
+      key: '001modaction',
       render: (_, record) => (
         <Space size="middle">
           <Tooltip title="启用">
@@ -137,6 +136,7 @@ export default function Mod() {
         columns={columns}
         dataSource={modList}
         style={border}
+        rowKey={(record) => record.id}
       />
     </div>
   );

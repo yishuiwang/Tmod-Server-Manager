@@ -42,11 +42,18 @@ const boxStyle = {
 };
 const borderOnline = {
   borderWidth: '3px',
+  borderBottomWidth: '5px',
   borderStyle: 'solid',
-  borderRadius: '5px',
   borderColor: 'rgb(0 0 0 / 13%)',
   width: '48%',
   display: 'inline-flex',
+};
+const titleStyle = {
+  borderBottom: '3px solid rgb(0 0 0 / 13%)',
+  height: '60px',
+  marginBottom: '-10px',
+  padding: '10px',
+  backgroundColor: '#fafafa',
 };
 const borderBan = { ...borderOnline, marginLeft: '4%' };
 
@@ -57,20 +64,20 @@ export default function Player() {
     {
       title: 'id',
       dataIndex: 'id',
-      key: 'id',
+      key: 'banrid',
       render: (text) => <a>{text}</a>,
       width: '100px',
     },
     {
       title: 'nickname',
       dataIndex: 'nickname',
-      key: 'name',
+      key: 'banname',
       render: (text) => <a>{text}</a>,
       width: '300px',
     },
     {
       title: 'Action',
-      key: 'action',
+      key: 'banaction',
       render: (_, record) => (
         <Space size="middle">
           <Tooltip title="删除">
@@ -89,20 +96,20 @@ export default function Player() {
     {
       title: 'id',
       dataIndex: 'id',
-      key: 'id',
+      key: 'normalid',
       render: (text) => <a>{text}</a>,
       width: '100px',
     },
     {
       title: 'nickname',
       dataIndex: 'nickname',
-      key: 'name',
+      key: 'normalname',
       render: (text) => <a>{text}</a>,
       width: '300px',
     },
     {
       title: 'Action',
-      key: 'action',
+      key: 'normalaction',
       render: (_, record) => (
         <Space size="middle">
           <Tooltip title="踢出服务器">
@@ -168,32 +175,30 @@ export default function Player() {
 
       <div style={borderOnline}>
         <Space direction="vertical">
-          <h3
-            style={{
-              borderBottom: '3px solid rgb(0 0 0 / 13%)',
-              height: '60px',
-            }}
-          >
-            当前在线
-          </h3>
+          <h3 style={titleStyle}>当前在线</h3>
           <div>
-            <Table pagination={false} columns={normal} dataSource={palyList} />
+            <Table
+              pagination={false}
+              columns={normal}
+              dataSource={palyList}
+              style={{ marginBottom: '-3px' }}
+              rowKey={(record) => record.id}
+            />
           </div>
         </Space>
       </div>
 
       <div style={borderBan}>
         <Space direction="vertical">
-          <h3
-            style={{
-              borderBottom: '3px solid rgb(0 0 0 / 13%)',
-              height: '60px',
-            }}
-          >
-            黑名单
-          </h3>
+          <h3 style={titleStyle}>黑名单</h3>
           <div>
-            <Table pagination={false} columns={ban} dataSource={banPlayer} />
+            <Table
+              pagination={false}
+              columns={ban}
+              dataSource={banPlayer}
+              style={{ marginBottom: '-3px' }}
+              rowKey={(record) => record.id}
+            />
           </div>
         </Space>
       </div>

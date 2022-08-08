@@ -6,7 +6,6 @@ import {
   CloudUploadOutlined,
 } from '@ant-design/icons';
 
-
 const boxStyle = {
   padding: '15px',
   borderRadius: '10px',
@@ -19,19 +18,19 @@ const boxStyle = {
 const borderMod = {
   borderWidth: '3px',
   borderStyle: 'solid',
-  borderRadius: '5px',
   borderColor: 'rgb(0 0 0 / 13%)',
   height: '150px',
   display: 'inline-flex',
   background: 'white',
   width: '48%',
   padding: '10px',
+  marginBottom: '20px',
 };
 const borderMap = { ...borderMod, marginLeft: '4%' };
 
 export default function File() {
   function upload() {
-    message.success('sbsz')
+    message.success('sbsz');
   }
 
   return (
@@ -39,19 +38,19 @@ export default function File() {
       <h2>File</h2>
       <div style={borderMod}>
         <Space direction="vertical" style={{ width: '100%' }}>
-          <h3>Mod</h3>
-          <Space size={0}>
-            <Input
-              style={{ height: '40px', width: '101%' }}
-              placeholder="Mod..."
-              prefix={<CloudUploadOutlined />}
-              onClick={upload}
-            />
-            <Button
-              style={{ width: '100%', height: '40px', marginLeft: '20%' }}
-            >
-              上传Mod
-            </Button>
+        <h3>模组</h3>
+          <Space size={30}>
+            <Space>
+              <Upload>
+                <Input
+                  style={{ height: '40px' }}
+                  placeholder="Mod..."
+                  prefix={<CloudUploadOutlined />}
+                />
+              </Upload>
+              <Button style={{ height: '40px' }}>上传Mod</Button>
+            </Space>
+            <Button style={{ height: '40px', width: '150px' }}>下载Mod</Button>
           </Space>
         </Space>
       </div>
@@ -64,7 +63,7 @@ export default function File() {
               <Upload>
                 <Input
                   style={{ height: '40px' }}
-                  placeholder="Mod..."
+                  placeholder="Map..."
                   prefix={<CloudUploadOutlined />}
                 />
               </Upload>

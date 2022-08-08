@@ -51,7 +51,6 @@ const LoginForm: React.FC = () => {
   return (
     <div className="login-layout" id="login-layout">
       <div className="logo-box">
-        <img alt="" className="logo" />
         <span className="logo-name">Tmod Server Manager</span>
       </div>
       {FormView}

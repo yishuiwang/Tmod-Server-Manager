@@ -12,7 +12,6 @@ const boxStyle = {
 const border = {
   borderWidth: '3px',
   borderStyle: 'solid',
-  borderRadius: '5px',
   borderColor: 'rgb(0 0 0 / 13%)',
   padding: '20px',
 };
