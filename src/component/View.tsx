@@ -9,27 +9,16 @@ import {
 import AppLayout from './AppLayout';
 import NotFound from '../pages/404/page404';
 import SSH from '../pages/SSH/ssh';
+import Home from '../pages/home/home';
 
 export default function View() {
   return (
     <div>
       <Router>
         <Routes>
-          {unAuthRouter.map((r) => (
-            <Route key={r.key} path={r.path} element={r.component}></Route>
-          ))}
-          <Route path="/" element={<Navigate to="/login" replace />}></Route>
-
-          <Route path="/ssh" element={<SSH></SSH>}></Route>
-
-          {router.map((r) => (
-            <Route
-              key={r.key}
-              path={r.path}
-              element={<AppLayout>{r.component}</AppLayout>}
-            ></Route>
-          ))}
-
+          <Route path="/" element={<Navigate to="/home" replace />}></Route>
+          <Route path="/ssh" element={<AppLayout><SSH/></AppLayout>}></Route>
+          <Route path="/home" element={<AppLayout><Home/></AppLayout>}></Route>
           <Route path="/404" element={<NotFound></NotFound>} />
           <Route path="*" element={<Navigate to="/404" replace />}></Route>
         </Routes>

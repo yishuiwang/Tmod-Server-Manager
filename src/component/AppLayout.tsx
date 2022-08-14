@@ -1,31 +1,15 @@
+import { Col, Layout, Menu, MenuProps, Row, Space } from 'antd';
 import {
-  Breadcrumb,
-  Col,
-  Dropdown,
-  Layout,
-  Menu,
-  MenuProps,
-  Row,
-  Space,
-} from 'antd';
-import {
-  AppstoreOutlined,
   CloudServerOutlined,
   SettingOutlined,
   GithubOutlined,
   CodeOutlined,
 } from '@ant-design/icons';
-import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { Content, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 
 import '../static/css/AppLayout.css';
-import Server from './server/server';
-import File from './file/file';
-import Player from './server/player';
-import Mod from './server/mod';
 import { Link } from 'react-router-dom';
-
-interface IProps {}
 
 const items: MenuProps['items'] = [
   {
@@ -37,41 +21,6 @@ const items: MenuProps['items'] = [
     label: <Link to={'/ssh'}>SSH</Link>,
     key: 'ssh',
     icon: <CodeOutlined />,
-  },
-  {
-    label: '还没想好些什么',
-    key: 'SubMenu',
-    icon: <SettingOutlined />,
-    children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          {
-            label: 'Option 1',
-            key: 'setting:1',
-          },
-          {
-            label: 'Option 2',
-            key: 'setting:2',
-          },
-        ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          {
-            label: 'Option 3',
-            key: 'setting:3',
-          },
-          {
-            label: 'Option 4',
-            key: 'setting:4',
-          },
-        ],
-      },
-    ],
   },
 ];
 
@@ -92,6 +41,9 @@ const support: MenuProps['items'] = [
   },
 ];
 
+interface IProps {
+  children: React.ReactNode;
+}
 const AppLayout: React.FC<IProps> = (Props) => {
   return (
     <div>
@@ -110,10 +62,7 @@ const AppLayout: React.FC<IProps> = (Props) => {
           <Row justify="center" style={{ minHeight: '100vh' }}>
             <Col>
               <Space direction="vertical" size={30}>
-                <Server></Server>
-                <Mod></Mod>
-                <Player></Player>
-                <File></File>
+                {Props.children}
               </Space>
             </Col>
           </Row>

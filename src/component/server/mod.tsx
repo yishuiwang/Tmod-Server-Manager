@@ -97,7 +97,7 @@ export default function Mod() {
       return m;
     });
     setModList(newlist);
-    message.success('Mod已启用');
+    message.success('Mod已启用，重启后生效');
   }
 
   function disableMod(record: any) {
@@ -108,7 +108,7 @@ export default function Mod() {
       return m;
     });
     setModList(newList);
-    message.success('Mod已禁用');
+    message.success('Mod已禁用，重启后生效');
   }
 
   function deleteMod(record: any) {

@@ -141,21 +141,15 @@ export default function Server() {
                 黎明
               </Button>
             </Tooltip>
-            <Tooltip title="设置时间">
-              <Button id="noon" style={{ width: '100%' }} onClick={setTime}>
-                正午
-              </Button>
-            </Tooltip>
-            <Tooltip title="设置时间">
-              <Button id="dusk" style={{ width: '100%' }} onClick={setTime}>
-                黄昏
-              </Button>
-            </Tooltip>
-            <Tooltip title="设置时间">
-              <Button id="midnight" style={{ width: '100%' }} onClick={setTime}>
-                午夜
-              </Button>
-            </Tooltip>
+            <Button id="noon" style={{ width: '100%' }} onClick={setTime}>
+              正午
+            </Button>
+            <Button id="dusk" style={{ width: '100%' }} onClick={setTime}>
+              黄昏
+            </Button>
+            <Button id="midnight" style={{ width: '100%' }} onClick={setTime}>
+              午夜
+            </Button>
           </Space>
         </div>
         <div style={{ display: 'inline-flex', width: '33%' }}>
