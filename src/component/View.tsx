@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import AppLayout from './AppLayout';
 import NotFound from '../pages/404/page404';
-import SSH from '../pages/SSH/ssh';
 import Home from '../pages/home/home';
 
 export default function View() {
@@ -17,7 +16,6 @@ export default function View() {
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />}></Route>
-          <Route path="/ssh" element={<AppLayout><SSH/></AppLayout>}></Route>
           <Route path="/home" element={<AppLayout><Home/></AppLayout>}></Route>
           <Route path="/404" element={<NotFound></NotFound>} />
           <Route path="*" element={<Navigate to="/404" replace />}></Route>

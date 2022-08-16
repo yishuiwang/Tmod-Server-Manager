@@ -1,9 +1,7 @@
 import { Col, Layout, Menu, MenuProps, Row, Space } from 'antd';
 import {
   CloudServerOutlined,
-  SettingOutlined,
   GithubOutlined,
-  CodeOutlined,
 } from '@ant-design/icons';
 import { Content, Header } from 'antd/lib/layout/layout';
 import React from 'react';
@@ -16,11 +14,6 @@ const items: MenuProps['items'] = [
     label: <Link to={'/home'}>服务器管理</Link>,
     key: 'server',
     icon: <CloudServerOutlined />,
-  },
-  {
-    label: <Link to={'/ssh'}>SSH</Link>,
-    key: 'ssh',
-    icon: <CodeOutlined />,
   },
 ];
 

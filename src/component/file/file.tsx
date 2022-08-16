@@ -22,7 +22,7 @@ const borderMod = {
   borderWidth: '3px',
   borderStyle: 'solid',
   borderColor: 'rgb(0 0 0 / 13%)',
-  height: '240px',
+  height: '150px',
   display: 'inline-flex',
   background: 'white',
   width: '48%',
@@ -73,7 +73,7 @@ export default function File() {
       <div style={boxStyle}>
         <h2>File</h2>
         <div style={borderMod}>
-          <Space direction="vertical" size={25} style={{ width: '100%' }}>
+          <Space direction="vertical" size={20} style={{ width: '100%' }}>
             <h3>模组</h3>
             <div>
               <Input
@@ -88,6 +88,7 @@ export default function File() {
                   height: '45px',
                   float: 'left',
                   marginLeft: '-1px',
+                  backgroundColor:'#fafafa'
                 }}
                 onClick={uploadmod}
               >
@@ -97,24 +98,17 @@ export default function File() {
                 type="primary"
                 shape="round"
                 size={'large'}
-                style={{ height: '45px', marginLeft: '15px' }}
+                style={{ height: '45px', marginLeft: '15px', }}
               >
                 上传Mod
               </Button>
             </div>
-            <Button
-              type="primary"
-              size={'large'}
-              icon={<CloudDownloadOutlined />}
-              style={{ height: '45px' }}
-            >
-              下载Mod
-            </Button>
+           
           </Space>
         </div>
 
         <div style={borderMap}>
-          <Space direction="vertical" size={25} style={{ width: '100%' }}>
+          <Space direction="vertical" size={20} style={{ width: '100%' }}>
             <h3>地图</h3>
             <div>
               <Input
@@ -129,6 +123,7 @@ export default function File() {
                   height: '45px',
                   float: 'left',
                   marginLeft: '-1px',
+                  backgroundColor:'#fafafa'
                 }}
                 onClick={uploadmap}
               >
@@ -138,19 +133,12 @@ export default function File() {
                 type="primary"
                 shape="round"
                 size={'large'}
-                style={{ height: '45px', marginLeft: '15px' }}
+                style={{ height: '45px', marginLeft: '15px'}}
               >
                 上传地图
               </Button>
             </div>
-            <Button
-              type="primary"
-              size={'large'}
-              icon={<CloudDownloadOutlined />}
-              style={{ height: '45px' }}
-            >
-              下载地图
-            </Button>
+           
           </Space>
         </div>
       </div>
