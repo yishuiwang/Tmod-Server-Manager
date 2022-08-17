@@ -1,13 +1,17 @@
-import { Button, Input, message, Space, Tooltip } from "antd";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Border, BoxStyle } from "./../../static/css/board";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  PoweroffOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
+import { Button, Input, message, Space, TreeSelect } from "antd";
+import { TreeNode } from "antd/lib/tree-select";
+import { useState } from "react";
+import { Border, BoxStyle } from "../../static/css/board";
 
 const initialServer = {
   ip: "192.168.200.1",
   num: "16",
-  passwrod: "sbsz",
-  port: "7777",
   name: "空岛生存带师",
   seed: "3.3.2.1964603061",
   serverVersion: "tModLoader v2022.6.96.4",
@@ -17,50 +21,40 @@ const initialServer = {
 
 export default function Server() {
   const [server, setServer] = useState(initialServer);
+  const [time, setTime] = useState(server.time);
 
-  useEffect(() => {
-    axios.get("127.0.0.1:9000/api/server/Info").then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   axios.post("http://localhost:9000/api/server/Info").then(
+  //     (response) => {
+  //       console.log(response.data);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }, []);
 
-  const handleChange = (event: any) => {
-    const id = event.target.id;
-    const value = event.target.value;
-    console.log(id, value);
-    setServer({
-      ...server,
-      [id]: value,
-    });
-    console.log(server);
-  };
-
-  const setTime = (event: any) => {
-    const id = event.target.id;
-    let newServer = server;
-    switch (id) {
+  const changeTime = (newValue: string) => {
+    switch (newValue) {
       case "dawn":
-        newServer.time = "4:30 AM";
+        setTime("4:30 AM");
         break;
       case "noon":
-        newServer.time = "12:00 PM";
+        setTime("12:00 PM");
         break;
       case "dusk":
-        newServer.time = "7:30 PM";
+        setTime("7:30 PM");
         break;
       case "midnight":
-        newServer.time = "12:00 AM";
+        setTime("12:00 AM");
         break;
       default:
         console.log("wrong time!");
     }
-    handleChange(event);
-    message.success("设置成功");
+  };
+
+  const handleChangeTime = () => {
+    message.success("设置时间成功");
   };
 
   const restart = () => {
@@ -75,109 +69,98 @@ export default function Server() {
 
   return (
     <div style={BoxStyle}>
+      {/* <h2>当前没有启动实例</h2>
+
+      <Button type="primary" size="large">
+        创建一个新实例
+      </Button>
+      <br></br>
+      <Button type="primary" size="large">
+        从现有实例启动
+      </Button> */}
+
       <h2>服务器信息：</h2>
       <div style={Border}>
-        <div style={{ display: "inline-flex", width: "33%" }}>
+        <div style={{ display: "inline-flex", width: "33%", padding: "10px" }}>
           <Space direction="vertical" size="small">
             <Space>
               <h3>ip地址</h3>
-              <Input id="ip" value={server.ip} onChange={handleChange}></Input>
+              <Input id="ip" value={server.ip}></Input>
             </Space>
             <Space size={22}>
               <h3>在线</h3>
-              <Input
-                id="num"
-                value={server.num}
-                onChange={handleChange}
-              ></Input>
-            </Space>
-            <Space size={22}>
-              <h3>密码</h3>
-              <Input
-                id="passwrod"
-                value={server.passwrod}
-                onChange={handleChange}
-              ></Input>
-            </Space>
-            <Space size={22}>
-              <h3>端口</h3>
-              <Input
-                id="port"
-                value={server.port}
-                onChange={handleChange}
-              ></Input>
+              <Input value={server.num}></Input>
             </Space>
             <Space size={22}>
               <h3>地图</h3>
-              <Input
-                id="name"
-                value={server.name}
-                onChange={handleChange}
-              ></Input>
+              <Input value={server.name}></Input>
             </Space>
             <Space size={22}>
               <h3>种子</h3>
-              <Input
-                id="seed"
-                value={server.seed}
-                onChange={handleChange}
-              ></Input>
+              <Input value={server.seed}></Input>
             </Space>
-          </Space>
-        </div>
-        <div style={{ display: "inline-flex", width: "33%" }}>
-          <Space direction="vertical" size="small">
-            <Space>
+            <Space size={22}>
               <h3>时间</h3>
-              <Input
-                id="time"
-                value={server.time}
-                onChange={handleChange}
-              ></Input>
+              <Input value={time}></Input>
             </Space>
-            <Tooltip title="设置时间">
-              <Button id="dawn" style={{ width: "100%" }} onClick={setTime}>
-                黎明
-              </Button>
-            </Tooltip>
-            <Button id="noon" style={{ width: "100%" }} onClick={setTime}>
-              正午
-            </Button>
-            <Button id="dusk" style={{ width: "100%" }} onClick={setTime}>
-              黄昏
-            </Button>
-            <Button id="midnight" style={{ width: "100%" }} onClick={setTime}>
-              午夜
-            </Button>
           </Space>
         </div>
         <div style={{ display: "inline-flex", width: "33%" }}>
           <Space direction="vertical" size="small">
             <Space>
               <h3>服务器版本</h3>
-              <Input
-                id="version"
-                value={server.serverVersion}
-                onChange={handleChange}
-              ></Input>
+              <Input value={server.serverVersion}></Input>
             </Space>
             <Space>
               <h3>客户端版本</h3>
-              <Input
-                id="version"
-                value={server.clientVersion}
-                onChange={handleChange}
-              ></Input>
+              <Input value={server.clientVersion}></Input>
             </Space>
-            <Button id="restart" style={{ width: "100%" }} onClick={restart}>
-              重启
-            </Button>
-            <Button id="stop" style={{ width: "100%" }} onClick={stop}>
-              关服
-            </Button>
-            <Button id="start" style={{ width: "100%" }} onClick={start}>
-              开服
-            </Button>
+          </Space>
+        </div>
+        <div
+          style={{ display: "inline-flex", width: "33%", marginTop: "10px" }}
+        >
+          <Space direction="vertical" size="small">
+            <Space>
+              <Button size="large" onClick={restart} icon={<ReloadOutlined />}>
+                重启
+              </Button>
+              <Button size="large" onClick={stop} icon={<PoweroffOutlined />}>
+                关服
+              </Button>
+              <Button
+                size="large"
+                onClick={start}
+                icon={<CheckCircleOutlined />}
+              >
+                开服
+              </Button>
+            </Space>
+            <Space>
+              <TreeSelect
+                id="timeTree"
+                showSearch
+                style={{ width: "185px" }}
+                dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                placeholder="设置时间"
+                allowClear
+                treeDefaultExpandAll
+                size="large"
+                onChange={changeTime}
+              >
+                <TreeNode value="dawn" title="黎明"></TreeNode>
+                <TreeNode value="noon" title="正午"></TreeNode>
+                <TreeNode value="dusk" title="黄昏"></TreeNode>
+                <TreeNode value="midnight" title="午夜"></TreeNode>
+              </TreeSelect>
+              <Button
+                size="large"
+                icon={<ClockCircleOutlined />}
+                onClick={handleChangeTime}
+              >
+                时间
+              </Button>
+            </Space>
           </Space>
         </div>
       </div>

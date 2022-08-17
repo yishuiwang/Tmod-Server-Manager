@@ -1,16 +1,7 @@
 import { CloudUploadOutlined } from "@ant-design/icons";
 import { Button, Input, Space } from "antd";
 import { useState } from "react";
-import { BorderMap, BorderMod } from "./../../static/css/board";
-
-const boxStyle = {
-  padding: "15px",
-  borderRadius: "10px",
-  boxShadow: "0 0 0 5px rgb(0 0 0 / 13%)",
-  marginTop: "20px",
-  backgroundColor: "white",
-  marginBottom: "100px",
-};
+import { BorderMap, BorderMod, BoxStyle } from "../../static/css/board";
 
 export default function File() {
   const [modName, setModName] = useState();
@@ -41,17 +32,17 @@ export default function File() {
       <input
         id="uploadmod"
         type="file"
-        style={{ opacity: 0, width: "1px", height: "1px" }}
+        style={{ opacity: 0, display: "none" }}
         onChange={modChange}
       />
       <input
         id="uploadmap"
         type="file"
-        style={{ opacity: 0, width: "1px", height: "1px" }}
+        style={{ opacity: 0, display: "none" }}
         onChange={mapChange}
       />
 
-      <div style={boxStyle}>
+      <div style={BoxStyle}>
         <h2>File</h2>
         <div style={BorderMod}>
           <Space direction="vertical" size={20} style={{ width: "100%" }}>

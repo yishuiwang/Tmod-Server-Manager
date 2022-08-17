@@ -12,6 +12,10 @@ const items: MenuProps["items"] = [
     key: "server",
     icon: <CloudServerOutlined />,
   },
+  {
+    label: <Link to={"/conf"}>配置方案</Link>,
+    key: "config",
+  },
 ];
 
 const support: MenuProps["items"] = [

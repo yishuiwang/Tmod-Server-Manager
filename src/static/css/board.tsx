@@ -4,6 +4,7 @@ export const BoxStyle = {
   boxShadow: "0 0 0 5px rgb(0 0 0 / 13%)",
   marginTop: "20px",
   backgroundColor: "white",
+  width: "1200",
 };
 export const Border = {
   borderWidth: "3px",

@@ -2,7 +2,7 @@ import { CheckOutlined, DeleteFilled, StopOutlined } from "@ant-design/icons";
 import { Button, message, Space, Tooltip } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
 import React, { useState } from "react";
-import { Border, BoxStyle } from "./../../static/css/board";
+import { Border, BoxStyle } from "../../static/css/board";
 
 interface Mod {
   id: string;

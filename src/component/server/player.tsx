@@ -11,7 +11,7 @@ import {
   BorderOnline,
   BoxStyle,
   TitleStyle,
-} from "./../../static/css/board";
+} from "../../static/css/board";
 
 interface player {
   id: string;
