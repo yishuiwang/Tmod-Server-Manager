@@ -1,13 +1,8 @@
-import { Button, message, Popconfirm, Space, Tooltip } from 'antd';
-import Table, { ColumnsType } from 'antd/lib/table';
-import React, { useState } from 'react';
-import {
-  DeleteFilled,
-  StopOutlined,
-  CheckOutlined,
-  WarningOutlined,
-} from '@ant-design/icons';
-import { act } from 'react-dom/test-utils';
+import { CheckOutlined, DeleteFilled, StopOutlined } from "@ant-design/icons";
+import { Button, message, Space, Tooltip } from "antd";
+import Table, { ColumnsType } from "antd/lib/table";
+import React, { useState } from "react";
+import { Border, BoxStyle } from "./../../static/css/board";
 
 interface Mod {
   id: string;
@@ -16,51 +11,38 @@ interface Mod {
 }
 
 const initial: Mod[] = [
-  { id: '1', name: 'Calamity Mod Music', isEnable: true },
-  { id: '2', name: '灾厄Mod-汉化补丁', isEnable: false },
-  { id: '3', name: 'AlchemistNPC Lite', isEnable: true },
+  { id: "1", name: "Calamity Mod Music", isEnable: true },
+  { id: "2", name: "灾厄Mod-汉化补丁", isEnable: false },
+  { id: "3", name: "AlchemistNPC Lite", isEnable: true },
 ];
-
-const boxStyle = {
-  padding: '15px',
-  borderRadius: '10px',
-  boxShadow: '0 0 0 5px rgb(0 0 0 / 13%)',
-  marginTop: '20px',
-  backgroundColor: 'white',
-};
-const border = {
-  borderWidth: '3px',
-  borderStyle: 'solid',
-  borderColor: 'rgb(0 0 0 / 13%)',
-};
 
 export default function Mod() {
   const [modList, setModList] = useState(initial);
   const columns: ColumnsType<Mod> = [
     {
-      title: 'id',
-      dataIndex: 'id',
-      key: '001modid',
+      title: "id",
+      dataIndex: "id",
+      key: "001modid",
       render: (text) => <a>{text}</a>,
-      width: '100px',
+      width: "100px",
     },
     {
-      title: '模组',
-      dataIndex: 'name',
-      key: '001modmod',
+      title: "模组",
+      dataIndex: "name",
+      key: "001modmod",
       render: (text) => <a>{text}</a>,
-      width: '500px',
+      width: "500px",
     },
     {
-      title: '状态',
-      dataIndex: 'isEnable',
-      key: '001modisEnable',
+      title: "状态",
+      dataIndex: "isEnable",
+      key: "001modisEnable",
       render: holdon,
-      width: '200px',
+      width: "200px",
     },
     {
-      title: 'Action',
-      key: '001modaction',
+      title: "Action",
+      key: "001modaction",
       render: (_, record) => (
         <Space size="middle">
           <Tooltip title="启用">
@@ -97,7 +79,7 @@ export default function Mod() {
       return m;
     });
     setModList(newlist);
-    message.success('Mod已启用，重启后生效');
+    message.success("Mod已启用，重启后生效");
   }
 
   function disableMod(record: any) {
@@ -108,16 +90,16 @@ export default function Mod() {
       return m;
     });
     setModList(newList);
-    message.success('Mod已禁用，重启后生效');
+    message.success("Mod已禁用，重启后生效");
   }
 
   function deleteMod(record: any) {
-    if (window.confirm('确定删除?')) {
+    if (window.confirm("确定删除?")) {
       const newList = modList.filter((modObj) => {
         return modObj.id !== record.id;
       });
       setModList(newList);
-      message.success('Mod已删除');
+      message.success("Mod已删除");
     }
   }
 
@@ -129,13 +111,13 @@ export default function Mod() {
   }
 
   return (
-    <div style={boxStyle}>
+    <div style={BoxStyle}>
       <h2>模组信息：</h2>
       <Table
         pagination={false}
         columns={columns}
         dataSource={modList}
-        style={border}
+        style={Border}
         rowKey={(record) => record.id}
       />
     </div>
