@@ -1,16 +1,16 @@
-import { CloudUploadOutlined } from "@ant-design/icons";
-import { Button, Input, Space } from "antd";
-import { useState } from "react";
-import { BorderMap, BorderMod, BoxStyle } from "../../static/css/board";
+import { CloudUploadOutlined } from '@ant-design/icons';
+import { Button, Input, Space } from 'antd';
+import { useState } from 'react';
+import { BorderMap, BorderMod, BoxStyle } from '../../static/css/board';
 
 export default function File() {
   const [modName, setModName] = useState();
   const [mapName, setMapName] = useState();
   function uploadmod() {
-    document.getElementById("uploadmod")?.click();
+    document.getElementById('uploadmod')?.click();
   }
   function uploadmap() {
-    document.getElementById("uploadmap")?.click();
+    document.getElementById('uploadmap')?.click();
   }
   function modChange(event: any) {
     const filename = event.target.files[0].name;
@@ -32,24 +32,24 @@ export default function File() {
       <input
         id="uploadmod"
         type="file"
-        style={{ opacity: 0, display: "none" }}
+        style={{ display: 'none' }}
         onChange={modChange}
       />
       <input
         id="uploadmap"
         type="file"
-        style={{ opacity: 0, display: "none" }}
+        style={{ display: 'none' }}
         onChange={mapChange}
       />
 
       <div style={BoxStyle}>
         <h2>File</h2>
         <div style={BorderMod}>
-          <Space direction="vertical" size={20} style={{ width: "100%" }}>
+          <Space direction="vertical" size={20} style={{ width: '100%' }}>
             <h3>模组</h3>
             <div>
               <Input
-                style={{ height: "45px", width: "55%", float: "left" }}
+                style={{ height: '45px', width: '55%', float: 'left' }}
                 placeholder="Mod..."
                 prefix={<CloudUploadOutlined />}
                 onClick={uploadmod}
@@ -57,10 +57,10 @@ export default function File() {
               />
               <Button
                 style={{
-                  height: "45px",
-                  float: "left",
-                  marginLeft: "-1px",
-                  backgroundColor: "#fafafa",
+                  height: '45px',
+                  float: 'left',
+                  marginLeft: '-1px',
+                  backgroundColor: '#fafafa',
                 }}
                 onClick={uploadmod}
               >
@@ -69,8 +69,8 @@ export default function File() {
               <Button
                 type="primary"
                 shape="round"
-                size={"large"}
-                style={{ height: "45px", marginLeft: "15px" }}
+                size={'large'}
+                style={{ height: '45px', marginLeft: '15px' }}
               >
                 上传Mod
               </Button>
@@ -79,11 +79,11 @@ export default function File() {
         </div>
 
         <div style={BorderMap}>
-          <Space direction="vertical" size={20} style={{ width: "100%" }}>
+          <Space direction="vertical" size={20} style={{ width: '100%' }}>
             <h3>地图</h3>
             <div>
               <Input
-                style={{ height: "45px", width: "55%", float: "left" }}
+                style={{ height: '45px', width: '55%', float: 'left' }}
                 placeholder="Map..."
                 prefix={<CloudUploadOutlined />}
                 onClick={uploadmap}
@@ -91,10 +91,10 @@ export default function File() {
               />
               <Button
                 style={{
-                  height: "45px",
-                  float: "left",
-                  marginLeft: "-1px",
-                  backgroundColor: "#fafafa",
+                  height: '45px',
+                  float: 'left',
+                  marginLeft: '-1px',
+                  backgroundColor: '#fafafa',
                 }}
                 onClick={uploadmap}
               >
@@ -103,8 +103,8 @@ export default function File() {
               <Button
                 type="primary"
                 shape="round"
-                size={"large"}
-                style={{ height: "45px", marginLeft: "15px" }}
+                size={'large'}
+                style={{ height: '45px', marginLeft: '15px' }}
               >
                 上传地图
               </Button>
