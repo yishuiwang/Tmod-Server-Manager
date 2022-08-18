@@ -1,4 +1,8 @@
-import { CloudServerOutlined, GithubOutlined } from "@ant-design/icons";
+import {
+  CloudServerOutlined,
+  GithubOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { Col, Layout, Menu, MenuProps, Row, Space } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
 import React from "react";
@@ -15,6 +19,7 @@ const items: MenuProps["items"] = [
   {
     label: <Link to={"/conf"}>配置方案</Link>,
     key: "config",
+    icon: <SettingOutlined />,
   },
 ];
 
