@@ -125,7 +125,11 @@ export default function Scheme() {
   }
 
   function addConf() {
-    let conf = { ...defaultValue, name: '默认配置方案', id: '3' };
+    let conf = {
+      ...defaultValue,
+      name: '默认配置方案',
+      id: (confs.length + 1).toString(),
+    };
     let newConfs = [...confs, conf];
     setConfs(newConfs);
   }
