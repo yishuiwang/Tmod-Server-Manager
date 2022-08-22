@@ -1,8 +1,14 @@
-import { DeleteOutlined, SaveOutlined, UndoOutlined } from '@ant-design/icons';
-import { Button, Collapse, message, Space } from 'antd';
-import { useState } from 'react';
-import { BoxStyle } from '../../static/css/board';
-import Item from './item';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  SaveOutlined,
+  UndoOutlined,
+} from "@ant-design/icons";
+import { Button, Collapse, message, Space } from "antd";
+import { useState } from "react";
+import "react-contenteditable";
+import { BoxStyle } from "../../static/css/board";
+import Item from "./item";
 const { Panel } = Collapse;
 
 export interface TrConf {
@@ -27,16 +33,16 @@ export interface TrConf {
 }
 
 const initialValue: TrConf = {
-  id: '1',
-  name: '配置方案一',
-  maxnum: '16',
-  password: 'sbsz',
-  port: '7777',
-  map: '空岛生存带师',
-  language: 'zh-Hans',
-  motd: 'welcome to Terraria',
+  id: "1",
+  name: "配置方案一",
+  maxnum: "16",
+  password: "sbsz",
+  port: "7777",
+  map: "空岛生存带师",
+  language: "zh-Hans",
+  motd: "welcome to Terraria",
   priority: 1,
-  ip: '',
+  ip: "",
   npcstream: 0,
   banlist: false,
   secure: false,
@@ -47,15 +53,23 @@ const initialValue: TrConf = {
 
 const initialScheme: TrConf[] = [
   initialValue,
-  { ...initialValue, id: '2', name: '配置方案二' },
+  { ...initialValue, id: "2", name: "配置方案二" },
 ];
 
 let defaultValue = JSON.parse(JSON.stringify(initialValue));
 
-const style = { ...BoxStyle, minHeight: '543px' };
+const style = { ...BoxStyle, minHeight: "543px" };
 
 export default function Scheme() {
   const [confs, setConfs] = useState(initialScheme);
+
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   console.log("isModalVisiblechange");
+  //   if(isModalVisible){
+
+  //   }
+  // }, [isModalVisible]);
 
   const getExtra = (conf: TrConf) => {
     return (
@@ -72,7 +86,7 @@ export default function Scheme() {
               });
               setConfs(newConfs);
               e.stopPropagation();
-              message.success(conf.name + '已保存');
+              message.success(conf.name + "已保存");
             }}
           >
             save
@@ -88,7 +102,7 @@ export default function Scheme() {
               });
               setConfs(newConfs);
               e.stopPropagation();
-              message.success(conf.name + '已重置');
+              message.success(conf.name + "已重置");
             }}
           >
             reset
@@ -97,14 +111,14 @@ export default function Scheme() {
             icon={<DeleteOutlined />}
             onClick={(e) => {
               e.stopPropagation();
-              if (window.confirm('确定删除?')) {
+              if (window.confirm("确定删除?")) {
                 let newConfs = confs;
                 newConfs = newConfs.filter((obj) => {
                   return obj.id !== conf.id;
                 });
                 setConfs(newConfs);
               }
-              message.success(conf.name + '已删除');
+              message.success(conf.name + "已删除");
             }}
           >
             delete
@@ -127,39 +141,95 @@ export default function Scheme() {
   function addConf() {
     let conf = {
       ...defaultValue,
-      name: '默认配置方案',
+      name: "默认配置方案",
       id: (confs.length + 1).toString(),
     };
     let newConfs = [...confs, conf];
     setConfs(newConfs);
   }
 
+  // 计算单行文本宽度
+  const getTextWidth = (text: string = "", font: string = "12px"): number => {
+    if (!text) return 12;
+    const dom = document.createElement("span") as HTMLElement;
+    dom.style.display = "inline-block";
+    dom.style.fontSize = font;
+    dom.style.whiteSpace = "nowrap";
+    dom.textContent = text;
+    document.body.appendChild(dom);
+    const width = dom.clientWidth;
+    document.body.removeChild(dom);
+    return width;
+  };
+
+  function updateName(e: any, conf: TrConf) {
+    e.stopPropagation();
+    var tall = prompt("请输入新的名称");
+    if (tall !== null) {
+      const newConf = confs.map((obj) => {
+        if (obj.id === conf.id) {
+          obj.name = tall!;
+        }
+        return obj;
+      });
+      setConfs(newConf);
+    }
+    console.log(conf);
+  }
+
   return (
     <div>
       <div style={style}>
-        <div style={{ display: 'inline-flex', width: '1200px' }}>
-          <h2 style={{ marginBottom: '20px' }}>
+        <div style={{ display: "inline-flex", width: "1200px" }}>
+          <h2 style={{ marginBottom: "20px" }}>
             当前共有: {confs.length}个配置方案
           </h2>
           <Button
-            style={{ marginLeft: '846px' }}
+            style={{ marginLeft: "846px" }}
             size="large"
             onClick={addConf}
           >
             创建新实例
           </Button>
         </div>
-        <Collapse defaultActiveKey={confs.length > 1 ? '' : '1'}>
+        <Collapse defaultActiveKey={confs.length > 1 ? "" : "1"}>
           {confs.map((conf) => {
             return (
-              <Panel header={conf.name} key={conf.id} extra={getExtra(conf)}>
+              <Panel
+                header={
+                  <div
+                    style={{
+                      width: getTextWidth(conf.name, "bold 12pt arial") + 60,
+                    }}
+                    onMouseEnter={() => {
+                      document.getElementById("edit" + conf.id)!.style.display =
+                        "block";
+                    }}
+                    onMouseLeave={() => {
+                      document.getElementById("edit" + conf.id)!.style.display =
+                        "none";
+                    }}
+                    onClick={(e) => updateName(e, conf)}
+                  >
+                    <Space>
+                      <h3>{conf.name}</h3>
+                      <EditOutlined
+                        id={"edit" + conf.id}
+                        style={{ display: "none", fontSize: "140%" }}
+                      />
+                    </Space>
+                  </div>
+                }
+                key={conf.id}
+                extra={getExtra(conf)}
+              >
                 <Item conf={conf} key={conf.id} updateConf={updateConf}></Item>
               </Panel>
             );
           })}
         </Collapse>
       </div>
-      <div style={{ minHeight: '150px' }}></div>
+      <div style={{ minHeight: "150px" }}></div>
     </div>
   );
 }

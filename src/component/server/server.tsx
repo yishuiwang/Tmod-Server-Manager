@@ -2,23 +2,23 @@ import {
   ClockCircleOutlined,
   PoweroffOutlined,
   ReloadOutlined,
-} from '@ant-design/icons';
-import { Button, Input, message, Modal, Radio, Space, TreeSelect } from 'antd';
-import { TreeNode } from 'antd/lib/tree-select';
-import { useState } from 'react';
-import { Border, BoxStyle } from '../../static/css/board';
+} from "@ant-design/icons";
+import { Button, Input, message, Modal, Radio, Space, TreeSelect } from "antd";
+import { TreeNode } from "antd/lib/tree-select";
+import { useState } from "react";
+import { Border, BoxStyle } from "../../static/css/board";
 
 const initialServer = {
-  ip: '192.168.200.1',
-  num: '16',
-  name: '空岛生存带师',
-  seed: '3.3.2.1964603061',
-  serverVersion: 'tModLoader v2022.6.96.4',
-  clientVersion: 'Terraria Server v1.4.3.6',
-  time: '8:03 PM',
+  ip: "192.168.200.1",
+  num: "16",
+  name: "空岛生存带师",
+  seed: "3.3.2.1964603061",
+  serverVersion: "tModLoader v2022.6.96.4",
+  clientVersion: "Terraria Server v1.4.3.6",
+  time: "8:03 PM",
 };
 
-const style = { ...BoxStyle, minHeight: '308px' };
+const style = { ...BoxStyle, minHeight: "308px" };
 
 export default function Server() {
   //服务器是否启动
@@ -45,32 +45,32 @@ export default function Server() {
 
   const changeTime = (newValue: string) => {
     switch (newValue) {
-      case 'dawn':
-        setTime('4:30 AM');
+      case "dawn":
+        setTime("4:30 AM");
         break;
-      case 'noon':
-        setTime('12:00 PM');
+      case "noon":
+        setTime("12:00 PM");
         break;
-      case 'dusk':
-        setTime('7:30 PM');
+      case "dusk":
+        setTime("7:30 PM");
         break;
-      case 'midnight':
-        setTime('12:00 AM');
+      case "midnight":
+        setTime("12:00 AM");
         break;
       default:
-        console.log('wrong time!');
+        console.log("wrong time!");
     }
   };
 
   const handleChangeTime = () => {
-    message.success('设置时间成功');
+    message.success("设置时间成功");
   };
 
   const restart = () => {
-    message.success('重启服务器成功');
+    message.success("重启服务器成功");
   };
   const stop = () => {
-    message.success('关闭服务器成功');
+    message.success("关闭服务器成功");
     setStarted(false);
   };
 
@@ -80,8 +80,8 @@ export default function Server() {
 
       <div
         style={{
-          textAlign: 'center',
-          display: started ? 'none' : 'block',
+          textAlign: "center",
+          display: started ? "none" : "block",
         }}
       >
         <h2>当前没有启动实例</h2>
@@ -101,10 +101,11 @@ export default function Server() {
           详细配置方案信息请参考wiki
         </Button>
         <Modal
-          title="Basic Modal"
+          title="选择配置方案"
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closable={false}
         >
           <Radio.Group>
             <Space direction="vertical">
@@ -115,10 +116,10 @@ export default function Server() {
           </Radio.Group>
         </Modal>
       </div>
-      <div style={{ display: started ? 'block' : 'none' }}>
+      <div style={{ display: started ? "block" : "none" }}>
         <div style={Border}>
           <div
-            style={{ display: 'inline-flex', width: '33%', padding: '10px' }}
+            style={{ display: "inline-flex", width: "33%", padding: "10px" }}
           >
             <Space direction="vertical" size="small">
               <Space>
@@ -143,7 +144,7 @@ export default function Server() {
               </Space>
             </Space>
           </div>
-          <div style={{ display: 'inline-flex', width: '33%' }}>
+          <div style={{ display: "inline-flex", width: "33%" }}>
             <Space direction="vertical" size="small">
               <Space>
                 <h3>服务器版本</h3>
@@ -156,7 +157,7 @@ export default function Server() {
             </Space>
           </div>
           <div
-            style={{ display: 'inline-flex', width: '33%', marginTop: '10px' }}
+            style={{ display: "inline-flex", width: "33%", marginTop: "10px" }}
           >
             <Space direction="vertical" size="small">
               <Space>
@@ -164,7 +165,7 @@ export default function Server() {
                   size="large"
                   onClick={restart}
                   icon={<ReloadOutlined />}
-                  style={{ width: '130px' }}
+                  style={{ width: "130px" }}
                 >
                   重启
                 </Button>
@@ -172,7 +173,7 @@ export default function Server() {
                   size="large"
                   onClick={stop}
                   icon={<PoweroffOutlined />}
-                  style={{ width: '130px' }}
+                  style={{ width: "130px" }}
                 >
                   关服
                 </Button>
@@ -181,8 +182,8 @@ export default function Server() {
                 <TreeSelect
                   id="timeTree"
                   showSearch
-                  style={{ width: '172px' }}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  style={{ width: "172px" }}
+                  dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
                   placeholder="设置时间"
                   allowClear
                   treeDefaultExpandAll
