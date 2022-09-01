@@ -1,7 +1,16 @@
-import { Input, InputNumber, Slider, Space, Switch, TreeSelect } from "antd";
-import { TreeNode } from "antd/lib/tree-select";
-import React, { useState } from "react";
-import { TrConf } from "./scheme";
+import {
+  Button,
+  Input,
+  InputNumber,
+  Modal,
+  Slider,
+  Space,
+  Switch,
+  TreeSelect,
+} from 'antd';
+import { TreeNode } from 'antd/lib/tree-select';
+import React, { useState } from 'react';
+import { TrConf } from './scheme';
 
 interface Ipropos {
   conf: TrConf;
@@ -10,14 +19,86 @@ interface Ipropos {
 
 const Item: React.FC<Ipropos> = (Props) => {
   const [visible, setVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   let { conf } = Props;
+
+  function addMap() {
+    showModal();
+  }
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
   return (
     <div>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={() => {
+          setIsModalVisible(false);
+        }}
+        onCancel={() => {
+          setIsModalVisible(false);
+        }}
+        closable={false}
+      >
+        <Space>
+          <h3 style={{ width: '100px' }}>world name</h3>
+          <Input></Input>
+        </Space>
+        <Space>
+          <h3 style={{ width: '100px' }}>world seed</h3>
+          <Input></Input>
+        </Space>
+
+        <Space>
+          <h3 style={{ width: '100px' }}>difficulty</h3>
+          <TreeSelect
+            showSearch
+            style={{ width: '182px' }}
+            value="Journey"
+            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+            placeholder="Please select"
+            allowClear
+            treeDefaultExpandAll
+            // onChange={(value: string) => {
+            //   conf.map = value;
+            //   Props.updateConf(conf);
+            // }}
+          >
+            <TreeNode value="parent 1" title="Classic"></TreeNode>
+            <TreeNode value="parent 1-1" title="Expert"></TreeNode>
+            <TreeNode value="parent 1-2" title="Master"></TreeNode>
+            <TreeNode value="parent 1-3" title="Journey"></TreeNode>
+          </TreeSelect>
+        </Space>
+        <Space>
+          <h3 style={{ width: '100px' }}>world size</h3>
+          <TreeSelect
+            showSearch
+            style={{ width: '182px' }}
+            value="Large"
+            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+            placeholder="Please select"
+            allowClear
+            treeDefaultExpandAll
+            // onChange={(value: string) => {
+            //   conf.map = value;
+            //   Props.updateConf(conf);
+            // }}
+          >
+            <TreeNode value="parent 1" title="Small"></TreeNode>
+            <TreeNode value="parent 1-1" title="Medium"></TreeNode>
+            <TreeNode value="parent 1-2" title="Large"></TreeNode>
+          </TreeSelect>
+        </Space>
+      </Modal>
+      ;
       <Space direction="vertical" size="small">
         <h2>basic</h2>
         <Space>
-          <h3 style={{ width: "100px" }}>Password</h3>
+          <h3 style={{ width: '100px' }}>Password</h3>
           <Input
             onChange={(event: any) => {
               conf.password = event.target.value;
@@ -27,9 +108,9 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></Input>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>Port</h3>
+          <h3 style={{ width: '100px' }}>Port</h3>
           <Input
-            defaultValue={"7777"}
+            defaultValue={'7777'}
             onChange={(event: any) => {
               conf.port = event.target.value;
               Props.updateConf(conf);
@@ -38,12 +119,12 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></Input>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>map</h3>
+          <h3 style={{ width: '100px' }}>map</h3>
           <TreeSelect
             showSearch
-            style={{ width: "182px" }}
+            style={{ width: '182px' }}
             value={conf.map}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
             placeholder="Please select"
             allowClear
             treeDefaultExpandAll
@@ -52,17 +133,27 @@ const Item: React.FC<Ipropos> = (Props) => {
               Props.updateConf(conf);
             }}
           >
-            <TreeNode value="parent 1" title="parent 1"></TreeNode>
-            <TreeNode value="parent 1-1" title="parent 1-1"></TreeNode>
+            <TreeNode value="parent 1" title="map1"></TreeNode>
+            <TreeNode value="parent 1-1" title="map2"></TreeNode>
+            <TreeNode
+              title={
+                <div style={{ marginLeft: '-15px' }}>
+                  <Button type="link" onClick={showModal}>
+                    创建新地图
+                  </Button>
+                </div>
+              }
+              value="parent 12"
+            />
           </TreeSelect>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>language</h3>
+          <h3 style={{ width: '100px' }}>language</h3>
           <TreeSelect
             showSearch
-            style={{ width: "182px" }}
+            style={{ width: '182px' }}
             value={conf.language}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
             placeholder="Please select"
             allowClear
             treeDefaultExpandAll
@@ -73,7 +164,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           >
             <TreeNode value="en-US" title="en-US"></TreeNode>
             <TreeNode value="zh-Hans" title="zh-Hans"></TreeNode>
-            <TreeNode value="de-DE" title="parent 1-1"></TreeNode>
+            <TreeNode value="de-DE" title="de-DE"></TreeNode>
             <TreeNode value="it-IT" title="it-IT"></TreeNode>
             <TreeNode value="fr-FR" title="fr-FR"></TreeNode>
             <TreeNode value="es-ES" title="es-ES"></TreeNode>
@@ -82,7 +173,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           </TreeSelect>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>motd</h3>
+          <h3 style={{ width: '100px' }}>motd</h3>
           <Input
             value={conf.motd}
             onChange={(event: any) => {
@@ -92,7 +183,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></Input>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>maxplayer</h3>
+          <h3 style={{ width: '100px' }}>maxplayer</h3>
           <Input
             id="maxnum"
             value={conf.maxnum}
@@ -103,10 +194,10 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></Input>
         </Space>
       </Space>
-      <Space direction="vertical" size="small" style={{ marginLeft: "60px" }}>
+      <Space direction="vertical" size="small" style={{ marginLeft: '60px' }}>
         <h2>pro</h2>
         <Space>
-          <h3 style={{ width: "100px" }}>npcstream</h3>
+          <h3 style={{ width: '100px' }}>npcstream</h3>
           <Slider
             min={0}
             max={60}
@@ -114,13 +205,13 @@ const Item: React.FC<Ipropos> = (Props) => {
               conf.npcstream = value;
               Props.updateConf(conf);
             }}
-            style={{ width: "120px" }}
-            value={typeof conf.npcstream === "number" ? conf.npcstream : 0}
+            style={{ width: '120px' }}
+            value={typeof conf.npcstream === 'number' ? conf.npcstream : 0}
           />
           <InputNumber
             min={0}
             max={60}
-            style={{ margin: "0 16px", width: "60px" }}
+            style={{ margin: '0 16px', width: '60px' }}
             defaultValue={0}
             value={conf.npcstream}
             onChange={(value: number) => {
@@ -130,7 +221,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></InputNumber>
         </Space>
         <Space>
-          <h3 style={{ width: "100px" }}>priority</h3>
+          <h3 style={{ width: '100px' }}>priority</h3>
           <Slider
             min={0}
             max={5}
@@ -138,13 +229,13 @@ const Item: React.FC<Ipropos> = (Props) => {
               conf.priority = value;
               Props.updateConf(conf);
             }}
-            style={{ width: "120px" }}
-            value={typeof conf.priority === "number" ? conf.priority : 0}
+            style={{ width: '120px' }}
+            value={typeof conf.priority === 'number' ? conf.priority : 0}
           />
           <InputNumber
             min={0}
             max={5}
-            style={{ margin: "0 16px", width: "60px" }}
+            style={{ margin: '0 16px', width: '60px' }}
             defaultValue={0}
             value={conf.priority}
             onChange={(value: number) => {
@@ -155,7 +246,7 @@ const Item: React.FC<Ipropos> = (Props) => {
         </Space>
 
         <Space>
-          <h3 style={{ width: "100px" }}>listen ip</h3>
+          <h3 style={{ width: '100px' }}>listen ip</h3>
           <Input
             onChange={(event: any) => {
               conf.ip = event.target.value;
@@ -164,7 +255,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           ></Input>
         </Space>
         <Space>
-          <h3 style={{ width: "60px" }}>steam</h3>
+          <h3 style={{ width: '60px' }}>steam</h3>
           <Switch
             onChange={(e) => {
               conf.steam = e;
@@ -174,7 +265,7 @@ const Item: React.FC<Ipropos> = (Props) => {
             }}
             checked={conf.steam}
           />
-          <h3 style={{ width: "60px", marginLeft: "30px" }}>lobby</h3>
+          <h3 style={{ width: '60px', marginLeft: '30px' }}>lobby</h3>
           <Switch
             disabled={!visible}
             onChange={(e) => {
@@ -185,7 +276,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           />
         </Space>
         <Space>
-          <h3 style={{ width: "60px" }}>upnp</h3>
+          <h3 style={{ width: '60px' }}>upnp</h3>
           <Switch
             onChange={(e) => {
               conf.upnp = e;
@@ -193,7 +284,7 @@ const Item: React.FC<Ipropos> = (Props) => {
             }}
             checked={conf.upnp}
           />
-          <h3 style={{ width: "60px", marginLeft: "30px" }}>banlist</h3>
+          <h3 style={{ width: '60px', marginLeft: '30px' }}>banlist</h3>
           <Switch
             onChange={(e) => {
               conf.banlist = e;
@@ -203,7 +294,7 @@ const Item: React.FC<Ipropos> = (Props) => {
           />
         </Space>
         <Space>
-          <h3 style={{ width: "60px" }}>secure</h3>
+          <h3 style={{ width: '60px' }}>secure</h3>
           <Switch
             onChange={(e) => {
               conf.secure = e;

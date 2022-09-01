@@ -140,7 +140,7 @@ export default function Scheme() {
   function addConf() {
     let conf = {
       ...defaultValue,
-      name: '默认配置方案',
+      name: '默认配置方案' + confs.length,
       id: (confs.length + 1).toString(),
     };
     let newConfs = [...confs, conf];
@@ -165,6 +165,13 @@ export default function Scheme() {
     e.stopPropagation();
     var tall = prompt('请输入新的名称');
     if (tall !== null) {
+      var i;
+      for (i in confs) {
+        if (confs[i].name === tall) {
+          alert('名称重复！');
+          return;
+        }
+      }
       const newConf = confs.map((obj) => {
         if (obj.id === conf.id) {
           obj.name = tall!;
@@ -191,7 +198,7 @@ export default function Scheme() {
             创建新实例
           </Button>
         </div>
-        <Collapse defaultActiveKey={confs.length > 1 ? '' : '1'}>
+        <Collapse defaultActiveKey={confs.length <= 1 ? '' : '1'}>
           {confs.map((conf) => {
             return (
               <Panel
