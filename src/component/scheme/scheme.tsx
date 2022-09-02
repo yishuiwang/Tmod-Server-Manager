@@ -52,7 +52,7 @@ const initialValue: TrConf = {
 
 const initialScheme: TrConf[] = [
   initialValue,
-  { ...initialValue, id: '2', name: '配置方案二' },
+  { ...initialValue, id: '2', name: '配置方案二', map: '我无敌了' },
 ];
 
 let defaultValue = JSON.parse(JSON.stringify(initialValue));
@@ -142,6 +142,7 @@ export default function Scheme() {
       ...defaultValue,
       name: '默认配置方案' + confs.length,
       id: (confs.length + 1).toString(),
+      map: '',
     };
     let newConfs = [...confs, conf];
     setConfs(newConfs);

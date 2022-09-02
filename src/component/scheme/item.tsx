@@ -17,16 +17,32 @@ interface Ipropos {
   updateConf: (conf: TrConf) => void;
 }
 
+interface mapConf {
+  name: string;
+  seed?: string;
+  difficult: string;
+  size: string;
+}
+
+const initialMap: mapConf = {
+  name: '默认地图',
+  difficult: 'Journey',
+  size: 'Large',
+};
+
 const Item: React.FC<Ipropos> = (Props) => {
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [map, setMap] = useState(initialMap);
+  const [worlds, setWorlds] = useState(['map1', 'map2']);
   let { conf } = Props;
 
   function addMap() {
-    showModal();
+    // showModal();
   }
 
-  const showModal = () => {
+  const showModal = (e: any) => {
+    e.stopPropagation();
     setIsModalVisible(true);
   };
 
@@ -37,6 +53,10 @@ const Item: React.FC<Ipropos> = (Props) => {
         visible={isModalVisible}
         onOk={() => {
           setIsModalVisible(false);
+          let newWorlds = worlds;
+          newWorlds.push(map.name);
+          setWorlds(newWorlds);
+          conf.map = map.name;
         }}
         onCancel={() => {
           setIsModalVisible(false);
@@ -45,11 +65,21 @@ const Item: React.FC<Ipropos> = (Props) => {
       >
         <Space>
           <h3 style={{ width: '100px' }}>world name</h3>
-          <Input></Input>
+          <Input
+            onChange={(event: any) => {
+              let newMap = { ...map, name: event.target.value };
+              setMap(newMap);
+            }}
+          ></Input>
         </Space>
         <Space>
           <h3 style={{ width: '100px' }}>world seed</h3>
-          <Input></Input>
+          <Input
+            onChange={(event: any) => {
+              let newMap = { ...map, seed: event.target.value };
+              setMap(newMap);
+            }}
+          ></Input>
         </Space>
 
         <Space>
@@ -57,20 +87,21 @@ const Item: React.FC<Ipropos> = (Props) => {
           <TreeSelect
             showSearch
             style={{ width: '182px' }}
-            value="Journey"
+            value={map.difficult}
             dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
             placeholder="Please select"
             allowClear
             treeDefaultExpandAll
-            // onChange={(value: string) => {
-            //   conf.map = value;
-            //   Props.updateConf(conf);
-            // }}
+            onChange={(value: string) => {
+              let newMap = { ...map, difficult: value };
+              setMap(newMap);
+              console.log(map);
+            }}
           >
-            <TreeNode value="parent 1" title="Classic"></TreeNode>
-            <TreeNode value="parent 1-1" title="Expert"></TreeNode>
-            <TreeNode value="parent 1-2" title="Master"></TreeNode>
-            <TreeNode value="parent 1-3" title="Journey"></TreeNode>
+            <TreeNode value="Classic" title="Classic"></TreeNode>
+            <TreeNode value="Expert" title="Expert"></TreeNode>
+            <TreeNode value="Master" title="Master"></TreeNode>
+            <TreeNode value="Journey" title="Journey"></TreeNode>
           </TreeSelect>
         </Space>
         <Space>
@@ -78,23 +109,23 @@ const Item: React.FC<Ipropos> = (Props) => {
           <TreeSelect
             showSearch
             style={{ width: '182px' }}
-            value="Large"
+            value={map.size}
             dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
             placeholder="Please select"
             allowClear
             treeDefaultExpandAll
-            // onChange={(value: string) => {
-            //   conf.map = value;
-            //   Props.updateConf(conf);
-            // }}
+            onChange={(value: string) => {
+              let newMap = { ...map, size: value };
+              setMap(newMap);
+              console.log(map);
+            }}
           >
-            <TreeNode value="parent 1" title="Small"></TreeNode>
-            <TreeNode value="parent 1-1" title="Medium"></TreeNode>
-            <TreeNode value="parent 1-2" title="Large"></TreeNode>
+            <TreeNode value="Small" title="Small"></TreeNode>
+            <TreeNode value="Medium" title="Medium"></TreeNode>
+            <TreeNode value="Large" title="Large"></TreeNode>
           </TreeSelect>
         </Space>
       </Modal>
-      ;
       <Space direction="vertical" size="small">
         <h2>basic</h2>
         <Space>
@@ -121,6 +152,7 @@ const Item: React.FC<Ipropos> = (Props) => {
         <Space>
           <h3 style={{ width: '100px' }}>map</h3>
           <TreeSelect
+            id="TreeSelect"
             showSearch
             style={{ width: '182px' }}
             value={conf.map}
@@ -133,8 +165,11 @@ const Item: React.FC<Ipropos> = (Props) => {
               Props.updateConf(conf);
             }}
           >
-            <TreeNode value="parent 1" title="map1"></TreeNode>
-            <TreeNode value="parent 1-1" title="map2"></TreeNode>
+            {worlds.map((world) => {
+              return (
+                <TreeNode value={world} title={world} key={world}></TreeNode>
+              );
+            })}
             <TreeNode
               title={
                 <div style={{ marginLeft: '-15px' }}>
