@@ -1,5 +1,6 @@
-import { Button, Modal, Radio, Space } from 'antd';
-import { useState } from 'react';
+import { Button, Modal, Radio, Space } from "antd";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface IProps {
   startGame: (action: boolean) => void;
@@ -24,7 +25,7 @@ const Finished: React.FC<IProps> = (Props) => {
   };
 
   const startServer = (event: any) => {
-    console.log('server start');
+    console.log("server start");
     //id
     console.log(event.target.value);
   };
@@ -33,14 +34,16 @@ const Finished: React.FC<IProps> = (Props) => {
     <div>
       <div
         style={{
-          textAlign: 'center',
+          textAlign: "center",
           // display: started ? 'none' : 'block',
         }}
       >
         <h2>当前没有启动实例</h2>
         <h3>你可以手动创建配置方案，或者上传自定义配置方案</h3>
         <Space>
-          <Button size="large">创建一个新实例</Button>
+          <Button size="large">
+            <Link to="/conf">创建一个新实例</Link>
+          </Button>
           <Button size="large" onClick={showModal}>
             从现有实例启动
           </Button>
@@ -67,7 +70,7 @@ const Finished: React.FC<IProps> = (Props) => {
                   <Radio
                     onClick={startServer}
                     value={obj.id}
-                    key={'sbsz' + obj.name}
+                    key={"sbsz" + obj.name}
                   >
                     {obj.name}
                   </Radio>
