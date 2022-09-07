@@ -1,29 +1,42 @@
-import { CloudUploadOutlined } from '@ant-design/icons';
-import { Button, Input, Space } from 'antd';
-import { useState } from 'react';
-import { BorderMap, BorderMod, BoxStyle } from '../../static/css/board';
+import { CloudUploadOutlined } from "@ant-design/icons";
+import { Button, Input, Space } from "antd";
+import { useState } from "react";
+import { BorderMap, BorderMod, BoxStyle } from "../../static/css/board";
 
 export default function File() {
   const [modName, setModName] = useState();
   const [mapName, setMapName] = useState();
   function uploadmod() {
-    document.getElementById('uploadmod')?.click();
+    document.getElementById("uploadmod")?.click();
   }
   function uploadmap() {
-    document.getElementById('uploadmap')?.click();
+    document.getElementById("uploadmap")?.click();
   }
   function modChange(event: any) {
-    const filename = event.target.files[0].name;
-    //const file = event.target.files[0];
-    // if (String(filename).slice(-4) === '.tmod') {
-    //   setModName(filename);
-    // }
+    const file = event.target.files;
+    var formFile = new FormData();
+    for (var i = 0; i < file.length; i++) {
+      formFile.append("file", file[i]);
+    }
+
+    var filename = event.target.files[0].name;
+    if (file.length >= 2) {
+      filename = filename + "...";
+    }
     setModName(filename);
   }
 
   function mapChange(event: any) {
-    const filename = event.target.files[0].name;
-    //const file = event.target.files[0];
+    const file = event.target.files;
+    var formFile = new FormData();
+    for (var i = 0; i < file.length; i++) {
+      formFile.append("file", file[i]);
+    }
+
+    var filename = event.target.files[0].name;
+    if (file.length >= 2) {
+      filename = filename + "...";
+    }
     setMapName(filename);
   }
 
@@ -32,24 +45,27 @@ export default function File() {
       <input
         id="uploadmod"
         type="file"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
+        accept=".tmod"
+        multiple
         onChange={modChange}
       />
       <input
         id="uploadmap"
         type="file"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
+        multiple
         onChange={mapChange}
       />
 
       <div style={BoxStyle}>
         <h2>File</h2>
         <div style={BorderMod}>
-          <Space direction="vertical" size={20} style={{ width: '100%' }}>
+          <Space direction="vertical" size={20} style={{ width: "100%" }}>
             <h3>模组</h3>
             <div>
               <Input
-                style={{ height: '45px', width: '55%', float: 'left' }}
+                style={{ height: "45px", width: "55%", float: "left" }}
                 placeholder="Mod..."
                 prefix={<CloudUploadOutlined />}
                 onClick={uploadmod}
@@ -57,10 +73,10 @@ export default function File() {
               />
               <Button
                 style={{
-                  height: '45px',
-                  float: 'left',
-                  marginLeft: '-1px',
-                  backgroundColor: '#fafafa',
+                  height: "45px",
+                  float: "left",
+                  marginLeft: "-1px",
+                  backgroundColor: "#fafafa",
                 }}
                 onClick={uploadmod}
               >
@@ -69,8 +85,8 @@ export default function File() {
               <Button
                 type="primary"
                 shape="round"
-                size={'large'}
-                style={{ height: '45px', marginLeft: '15px' }}
+                size={"large"}
+                style={{ height: "45px", marginLeft: "15px" }}
               >
                 上传Mod
               </Button>
@@ -79,11 +95,11 @@ export default function File() {
         </div>
 
         <div style={BorderMap}>
-          <Space direction="vertical" size={20} style={{ width: '100%' }}>
+          <Space direction="vertical" size={20} style={{ width: "100%" }}>
             <h3>地图</h3>
             <div>
               <Input
-                style={{ height: '45px', width: '55%', float: 'left' }}
+                style={{ height: "45px", width: "55%", float: "left" }}
                 placeholder="Map..."
                 prefix={<CloudUploadOutlined />}
                 onClick={uploadmap}
@@ -91,10 +107,10 @@ export default function File() {
               />
               <Button
                 style={{
-                  height: '45px',
-                  float: 'left',
-                  marginLeft: '-1px',
-                  backgroundColor: '#fafafa',
+                  height: "45px",
+                  float: "left",
+                  marginLeft: "-1px",
+                  backgroundColor: "#fafafa",
                 }}
                 onClick={uploadmap}
               >
@@ -103,8 +119,8 @@ export default function File() {
               <Button
                 type="primary"
                 shape="round"
-                size={'large'}
-                style={{ height: '45px', marginLeft: '15px' }}
+                size={"large"}
+                style={{ height: "45px", marginLeft: "15px" }}
               >
                 上传地图
               </Button>
@@ -112,7 +128,7 @@ export default function File() {
           </Space>
         </div>
       </div>
-      <div style={{ height: '150px' }}></div>
+      <div style={{ height: "150px" }}></div>
     </div>
   );
 }
