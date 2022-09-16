@@ -3,11 +3,12 @@ import {
   Navigate,
   Route,
   Routes,
-} from "react-router-dom";
-import NotFound from "../pages/404/page404";
-import Conf from "../pages/conf/conf";
-import Home from "../pages/home/home";
-import AppLayout from "./AppLayout";
+} from 'react-router-dom';
+import NotFound from '../pages/404/page404';
+import Conf from '../pages/conf/conf';
+import Home from '../pages/home/home';
+import LoginForm from '../pages/login/login';
+import AppLayout from './AppLayout';
 
 export default function View() {
   return (
@@ -31,6 +32,7 @@ export default function View() {
               </AppLayout>
             }
           ></Route>
+          <Route path="/login" element={<LoginForm />}></Route>
           <Route path="/404" element={<NotFound></NotFound>} />
           <Route path="*" element={<Navigate to="/404" replace />}></Route>
         </Routes>

@@ -1,7 +1,6 @@
-import { Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Input, Row } from 'antd';
 import React from 'react';
-import '../../static/css/login.css';
 
 const LoginForm: React.FC = () => {
   const onFinish = (values: any) => {
@@ -15,9 +14,9 @@ const LoginForm: React.FC = () => {
   const FormView = (
     <Form
       initialValues={{ username: '', password: '' }}
-      className="login-form"
       name="login-form"
       onFinish={onFinish}
+      style={{ width: '368px', margin: '0 auto', zIndex: 2 }}
     >
       <Form.Item
         name="username"
@@ -37,10 +36,10 @@ const LoginForm: React.FC = () => {
       </Form.Item>
       <Form.Item>
         <Button
-          className="login-form-button"
           htmlType="submit"
           size="large"
           type="primary"
+          style={{ width: '100%' }}
         >
           登录
         </Button>
@@ -49,11 +48,40 @@ const LoginForm: React.FC = () => {
   );
 
   return (
-    <div className="login-layout" id="login-layout">
-      <div className="logo-box">
-        <span className="logo-name">Tmod Server Manager</span>
-      </div>
-      {FormView}
+    <div
+      style={{
+        backgroundImage: 'url(' + require('../../static/img/dNMT4z.png') + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+      }}
+    >
+      <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
+        <Col>
+          <div
+            style={{
+              width: '500px',
+              height: '260px',
+              backgroundColor: '#00000060',
+              textAlign: 'center',
+              padding: '15px',
+            }}
+          >
+            <span
+              style={{
+                color: 'rgb(119, 119, 124)',
+                fontSize: 26,
+                fontWeight: 600,
+                display: 'inline-block',
+                margin: 'auto',
+                marginBottom: 10,
+              }}
+            >
+              Tmod Server Manager
+            </span>
+            {FormView}
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };

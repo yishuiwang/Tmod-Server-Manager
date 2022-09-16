@@ -2,30 +2,30 @@ import {
   CloudServerOutlined,
   GithubOutlined,
   SettingOutlined,
-} from "@ant-design/icons";
-import { Col, Layout, Menu, MenuProps, Row, Space } from "antd";
-import { Content, Header } from "antd/lib/layout/layout";
-import React from "react";
+} from '@ant-design/icons';
+import { Col, Layout, Menu, MenuProps, Row, Space } from 'antd';
+import { Content, Header } from 'antd/lib/layout/layout';
+import React from 'react';
 
-import { Link } from "react-router-dom";
-import "../static/css/AppLayout.css";
+import { Link } from 'react-router-dom';
+import '../static/css/AppLayout.css';
 
-const items: MenuProps["items"] = [
+const items: MenuProps['items'] = [
   {
-    label: <Link to={"/home"}>服务器管理</Link>,
-    key: "server",
+    label: <Link to={'/home'}>服务器管理</Link>,
+    key: 'server',
     icon: <CloudServerOutlined />,
   },
   {
-    label: <Link to={"/conf"}>配置方案</Link>,
-    key: "config",
+    label: <Link to={'/conf'}>配置方案</Link>,
+    key: 'config',
     icon: <SettingOutlined />,
   },
 ];
 
-const support: MenuProps["items"] = [
+const support: MenuProps['items'] = [
   {
-    className: "support",
+    className: 'support',
     label: (
       <a
         href="https://github.com/yishuiwang/Tmod-Server-Manager"
@@ -35,8 +35,8 @@ const support: MenuProps["items"] = [
         Github
       </a>
     ),
-    key: "github",
-    icon: <GithubOutlined style={{ fontSize: "120%" }} />,
+    key: 'github',
+    icon: <GithubOutlined style={{ fontSize: '120%' }} />,
   },
 ];
 
@@ -47,18 +47,18 @@ const AppLayout: React.FC<IProps> = (Props) => {
   return (
     <div>
       <Layout>
-        <Header style={{ backgroundColor: "white" }}>
-          <div className="logo" />
+        <Header style={{ backgroundColor: 'white' }}>
+          <a href="/home" className="logo" />
           <Menu
             className="Menu"
             theme="light"
             mode="horizontal"
-            defaultSelectedKeys={["server"]}
+            defaultSelectedKeys={['server']}
             items={items.concat(support)}
           />
         </Header>
-        <Content style={{ padding: "0 50px" }}>
-          <Row justify="center" style={{ minHeight: "100vh" }}>
+        <Content style={{ padding: '0 50px' }}>
+          <Row justify="center" style={{ minHeight: '100vh' }}>
             <Col>
               <Space direction="vertical" size={30}>
                 {Props.children}
